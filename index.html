@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>DataWedge KeyEvent Demonstration</title>
+    <style>
+        html,
+        body {
+            overflow-x: hidden;
+        }
+
+        body {
+            position: relative
+        }
+
+        .wordwrap {
+            white-space: pre-wrap;
+            /* CSS3 */
+            white-space: -moz-pre-wrap;
+            /* Firefox */
+            white-space: -pre-wrap;
+            /* Opera <7 */
+            white-space: -o-pre-wrap;
+            /* Opera 7 */
+            word-wrap: break-word;
+            /* IE */
+        }
+    </style>
+</head>
+
+<script>
+    document.addEventListener('keypress', keypressHandler);
+    document.addEventListener('keyup', keyupHandler);
+    document.addEventListener('keydown', keydownHandler);
+    function listenForKeyPress(listen) {
+        console.log(listen);
+        if (listen) {
+            console.log("Adding keypress listener");
+            document.addEventListener('keypress', keypressHandler);
+        }
+        else {
+            console.log("Removing keypress listener");
+            document.removeEventListener('keypress', keypressHandler);
+        }
+
+    }
+    function keypressHandler(e) {
+        const keypressoutput = document.getElementById('pressed_keys');
+        console.log('pressed: ' + e.keyCode);
+        if (e.keyCode == 13)    //  Enter key from DataWedge
+            keypressoutput.innerHTML += "<BR>";
+        else
+            keypressoutput.innerHTML += e.key;
+    }
+    function keyupHandler(e) { console.log('up: ' + e.keyCode); }
+    function keydownHandler(e) { console.log('down: ' + e.keyCode); }
+</script>
+
+<body>
+    <h1>DataWedge KeyEvent Demo</h1>
+    Listen for KeyPress? <input id="chk_listen_keypress" type="checkbox" onchange='listenForKeyPress(this.checked);'
+        checked><br>
+    Reload to clear page
+    <P></P>
+    <H3>Output</H3>
+    <div id="pressed_keys" class="wordwrap"></div>
+    <!--button type="button" onclick="submit()">Submit</button-->
+</body>
+
+</html>
