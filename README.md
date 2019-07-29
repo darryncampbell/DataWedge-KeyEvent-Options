@@ -4,12 +4,12 @@ The recently released [DataWedge 7.3](http://techdocs.zebra.com/datawedge/latest
 
 There are a number of advantages to this approach:
 
-- Any web application can now listen for now barcode scans by **listening for key press events on the DOM** without having to worry about having the cursor in the correct input field or advancing to the next field after the barcode is scanned.
+- Any web application can now receive barcode scans by **listening for key press events on the DOM** without having to worry about having the cursor in the correct input field or advancing to the next field after the barcode is scanned.
 - Applications written for HID based external scanners can be run on Zebra Android devices **without having to modify the application** at all.
 - Web applications can be run **entirely within the Browser** without having to worry about external frameworks or native dependencies
 - Future compatibility - this is a very simple solution and you are **not tying yourself to the hardware manufacturer**.
 
-Within your DataWedge profile navigate to the Keystroke output section, then Key event options to see the above options under DW 7.4.
+Within your DataWedge profile navigate to the Keystroke output section, then Key event options to see the above options under DW 7.3.
 
 ![DataWedge options](https://raw.githubusercontent.com/darryncampbell/DataWedge-KeyEvent-Options/master/screenshots/datawedge-key-options1.jpg)
 
@@ -33,7 +33,7 @@ function keypressHandler(e)
 }
 ```
 
-For each scanned barcode the text is delivered to the application as key presses and the above example will appended  a carriage return whenever it sees the 'Enter' character.  The code will appear as follows in Chrome:
+For each scanned barcode the text is delivered to the application as key presses and the above example will appended a "<BR>" whenever it sees the 'Enter' character.  The code will appear as follows in Chrome:
 
 ![Application output](https://raw.githubusercontent.com/darryncampbell/DataWedge-KeyEvent-Options/master/screenshots/app.png)
 
@@ -57,11 +57,11 @@ Do NOT assume (as I did) that e.g. sending ASCII code decimal 7 will result in t
 
 For example, ASCII code decimal 7 actually refers to the code equivalent of CTRL+G (decimal 71).
 
-By way of a demonstration, if we enable this option and send a barcode containing the ASCII code decimal 7 we can look at how this event is received by the application:
+By way of a demonstration, **if we enable this option** and send a barcode containing the ASCII code decimal 7 we can look at how this event is received by the application:
 
 ![ASCII Decimal 7](https://raw.githubusercontent.com/darryncampbell/DataWedge-KeyEvent-Options/master/screenshots/ctrl-plus-g.png)
 
-The barcode used for this is given at the bottom of this document.  Note that the ASCII keycode **71** is received in the application for both KEYUP and KEYDOWN but NOT for KEYPRESS, this is expected behaviour since Android will not generate a KEYPRESS event for ASCII code 71.  You can observe the same behaviour by loading the test page in a browser and pressing CTRL+G, where you will also receive a keycode 71.
+The barcode used for this is given at the bottom of this document.  Note that the ASCII keycode **71** is received in the application for both KEYUP and KEYDOWN but NOT for KEYPRESS, this is expected behaviour since Android will not generate a KEYPRESS event for ASCII code 71.  You can observe the same behaviour by loading the test page in a desktop browser and pressing CTRL+G, where you will also receive a keycode 71.
 
 ## Things to Bear in Mind
 
