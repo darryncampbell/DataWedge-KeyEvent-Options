@@ -1,3 +1,6 @@
+*This code is provided without guarantee or warranty*
+=========================================================
+
 # DataWedge KeyEvent Options
 
 The recently released [DataWedge 7.3](http://techdocs.zebra.com/datawedge/latest/guide/output/keystroke/) quietly introduced a new feature that customers have been requesting for a long time now, the ability to send data as key events.  What this means in practice is an application can now listen for **keypress events** whereas previously the application could only scan into text fields using the keystroke plugin.
